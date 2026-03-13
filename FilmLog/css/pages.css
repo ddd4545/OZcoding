@@ -129,7 +129,7 @@
 }
 
 .auth-form {
-  max-width: 540px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 48px;
   background: white;
@@ -176,6 +176,62 @@
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 4px rgba(255, 106, 61, 0.1);
+}
+
+.modal__input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: var(--transition-base);
+}
+
+.modal__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(255, 106, 61, 0.1);
+}
+
+.modal__input-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.modal__label {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dark);
+}
+
+.modal__input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  font-size: 15px;
+  transition: var(--transition-base);
+  margin-bottom: 8px; /* Added margin as requested */
+}
+
+/* Archive Deletion */
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  color: #ff4d4d;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: var(--transition-base);
+  margin-left: 8px;
+}
+
+.delete-icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .auth-form__submit {
@@ -307,10 +363,35 @@
   gap: 12px;
   transition: var(--transition-base);
   border: 1px solid transparent;
+  position: relative;
+  cursor: pointer;
 }
 
 .film-card--selected {
   outline: 2px solid var(--color-accent);
+}
+
+.film-card__check {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  width: 28px;
+  height: 28px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: var(--transition-base);
+  color: white;
+  z-index: 2;
+}
+
+.film-card--selected .film-card__check {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .film-card__img {
@@ -606,6 +687,49 @@
   transform: scale(1);
 }
 
+.photo-item__date {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.selection-footer {
+  padding: 60px 0 100px;
+}
+
+.selection-footer .container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.selection-footer .btn--next {
+  width: 100%;
+  max-width: 240px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--color-dark);
+  color: white;
+  border-radius: 12px;
+  transition: var(--transition-base);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.selection-footer .btn--next:hover {
+  transform: translateY(-2px);
+  background: #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
 .checkout-bar {
   position: fixed;
   bottom: 0;
@@ -709,10 +833,46 @@
   padding: 80px 0 40px;
 }
 
+.archive-header__title-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
 .archive-header__title {
   font-size: 32px;
   font-weight: 700;
-  margin-bottom: 12px;
+  border: 1px solid transparent;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin: 0;
+  transition: var(--transition-base);
+}
+
+.archive-header__title:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+.archive-header__title:focus {
+  outline: none;
+  background: white;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(255, 106, 61, 0.1);
+}
+
+.edit-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-muted);
+  cursor: pointer;
+  opacity: 0.6;
+  transition: var(--transition-base);
+}
+
+.edit-icon:hover {
+  opacity: 1;
+  color: var(--color-accent);
 }
 
 .archive-header__meta {
@@ -721,14 +881,27 @@
 }
 
 .archive-strip {
+  max-width: 1200px;
+  width: calc(100% - 48px);
+  margin: 0 auto;
   background: #111;
-  padding: 60px 0;
+  padding: 60px 40px;
+  border-radius: 20px;
   overflow-x: auto;
   white-space: nowrap;
   display: flex;
   gap: 20px;
-  padding-left: 5vw;
-  padding-right: 5vw;
+  cursor: grab;
+  user-select: none;
+  scrollbar-width: none; /* Firefox */
+}
+
+.archive-strip::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.archive-strip:active {
+  cursor: grabbing;
 }
 
 .film-unit {
@@ -762,7 +935,7 @@
 .perf {
   width: 16px;
   height: 10px;
-  background: #000;
+  background: #fff;
   border-radius: 2px;
 }
 

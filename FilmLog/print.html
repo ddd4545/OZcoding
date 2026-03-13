@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>인화 서비스 | FilmLog</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <style>
+      .roll-selector {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 40px;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE/Edge */
+      }
+      .roll-selector::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+      .roll-chip {
+        padding: 10px 20px;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 30px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: var(--transition-base);
+      }
+      .roll-chip--active {
+        background: var(--color-accent);
+        color: white;
+        border-color: var(--color-accent);
+      }
+      .photo-grid--hidden {
+        display: none;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 80px 0;
+        color: var(--color-muted);
+      }
+    </style>
+  </head>
+  <body class="shop-body">
+    <div id="header"></div>
+
+    <main class="shop-page container">
+      <section class="shop-header">
+        <h1 class="shop-header__title">인화 서비스</h1>
+        <p class="shop-header__desc">
+          인화할 롤을 먼저 선택한 후, 사진을 골라주세요.
+        </p>
+      </section>
+
+      <div class="roll-selector">
+        <div class="roll-chip" data-roll="all">모든 사진</div>
+        <div class="roll-chip" data-roll="042">#042 - 2026년 일본의 봄</div>
+        <div class="roll-chip" data-roll="041">#041 - 제주도 추억</div>
+      </div>
+
+      <div id="photo-grid-container">
+        <div class="empty-state" id="empty-state">
+          인화할 롤을 선택해 주세요.
+        </div>
+
+        <!-- Roll 042 -->
+        <div class="photo-grid photo-grid--hidden" id="grid-042">
+            <div class="photo-item" data-id="042-1">
+              <img
+                src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=400"
+                class="photo-item__img"
+              />
+              <div class="photo-item__date">26' 03 12</div>
+              <div class="photo-item__check">✓</div>
+            </div>
+            <div class="photo-item" data-id="042-2">
+              <img
+                src="https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&q=80&w=400"
+                class="photo-item__img"
+              />
+              <div class="photo-item__date">26' 03 12</div>
+              <div class="photo-item__check">✓</div>
+            </div>
+            <div class="photo-item" data-id="042-3">
+              <img
+                src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&q=80&w=400"
+                class="photo-item__img"
+              />
+              <div class="photo-item__date">26' 03 12</div>
+              <div class="photo-item__check">✓</div>
+            </div>
+            <div class="photo-item" data-id="042-4">
+              <img
+                src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&q=80&w=400"
+                class="photo-item__img"
+              />
+              <div class="photo-item__date">26' 03 12</div>
+              <div class="photo-item__check">✓</div>
+            </div>
+        </div>
+
+        <!-- Roll 041 -->
+        <div class="photo-grid photo-grid--hidden" id="grid-041">
+            <div class="photo-item" data-id="041-1">
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=400"
+                class="photo-item__img"
+              />
+              <div class="photo-item__date">26' 02 20</div>
+              <div class="photo-item__check">✓</div>
+            </div>
+            <div class="photo-item" data-id="041-2">
+              <img
+                src="https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=400"
+                class="photo-item__img"
+              />
+              <div class="photo-item__date">26' 02 20</div>
+              <div class="photo-item__check">✓</div>
+            </div>
+        </div>
+      </div>
+    </main>
+
+    <div id="footer"></div>
+    <script src="js/include.js"></script>
+
+    <div class="checkout-bar">
+      <div class="container checkout-bar__container">
+        <div class="checkout-bar__info">
+          <div class="checkout-bar__count">0장의 사진 선택됨</div>
+          <div class="checkout-bar__details">4x6 인치 / 무광 인화지</div>
+        </div>
+        <button class="btn btn--primary checkout-bar__btn is-disabled">
+          결제하기
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const initialRoll = urlParams.get("roll");
+
+      const rollChips = document.querySelectorAll(".roll-chip");
+      const grids = document.querySelectorAll(".photo-grid");
+      const emptyState = document.getElementById("empty-state");
+      const photoItems = document.querySelectorAll(".photo-item");
+      const checkoutBtn = document.querySelector(".checkout-bar__btn");
+      const countEl = document.querySelector(".checkout-bar__count");
+
+      function selectAllPhotos() {
+        photoItems.forEach((item) => item.classList.add("photo-item--selected"));
+        updateCheckoutBar();
+      }
+
+      function selectRoll(rollId) {
+        rollChips.forEach((chip) =>
+          chip.classList.toggle(
+            "roll-chip--active",
+            chip.dataset.roll === rollId,
+          ),
+        );
+        grids.forEach((grid) => grid.classList.add("photo-grid--hidden"));
+        emptyState.style.display = "none";
+
+        if (rollId === "all") {
+          grids.forEach((grid) => grid.classList.remove("photo-grid--hidden"));
+          // selectAllPhotos() call removed per user request: "이미지는 아무것도 선택이 안되어있는게 기본"
+        } else if (rollId) {
+          const targetGrid = document.getElementById(`grid-${rollId}`);
+          if (targetGrid) targetGrid.classList.remove("photo-grid--hidden");
+        } else {
+          emptyState.style.display = "block";
+        }
+      }
+
+      rollChips.forEach((chip) => {
+        chip.addEventListener("click", () => selectRoll(chip.dataset.roll));
+      });
+
+      photoItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          item.classList.toggle("photo-item--selected");
+          updateCheckoutBar();
+        });
+      });
+
+      function updateCheckoutBar() {
+        const selectedCount = document.querySelectorAll(
+          ".photo-item--selected",
+        ).length;
+        countEl.textContent = `${selectedCount}장의 사진 선택됨`;
+        checkoutBtn.textContent =
+          selectedCount > 0
+            ? `${(selectedCount * 1250).toLocaleString()}원 결제하기`
+            : "결제하기";
+
+        if (selectedCount === 0) {
+          checkoutBtn.classList.add("is-disabled");
+        } else {
+          checkoutBtn.classList.remove("is-disabled");
+        }
+      }
+
+      // Default to "all" if no roll parameter
+      const defaultRoll = initialRoll || "all";
+      selectRoll(defaultRoll);
+    </script>
+  </body>
+</html>

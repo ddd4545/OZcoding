@@ -1,61 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>필름 아카이브 | FilmLog</title>
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
-</head>
-<body>
-  <div id="header"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>필름 아카이브 | FilmLog</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div id="header"></div>
 
-  <main class="archive-page">
-    <section class="container archive-header">
-      <h1 class="archive-header__title">#042 - 2026년 일본의 봄</h1>
-      <p class="archive-header__meta">Leica M6 | Kodak Portra 400 | 2026. 03. 12</p>
-    </section>
+    <main class="archive-page">
+      <section class="container archive-header">
+        <div class="archive-header__title-container">
+          <h1 class="archive-header__title" contenteditable="true">
+            #042 - 2026년 일본의 봄
+          </h1>
+        </div>
+        <p class="archive-header__meta">
+          Leica M6 | Kodak Portra 400 | 2026. 03. 12
+        </p>
+      </section>
 
-    <div class="archive-strip">
-      <div class="film-unit">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=600" class="film-unit__img">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <div class="film-unit__code mono">KODAK 400TMY 01</div>
+      <div class="archive-strip" id="strip-042">
+        <div class="film-unit">
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <img
+            src="img/kodak_plus.jpg"
+            class="film-unit__img"
+            draggable="false"
+          />
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <div class="film-unit__code mono">KODAK 400TMY 01</div>
+        </div>
+        <div class="film-unit">
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <img
+            src="img/kodak_gold.jpg"
+            class="film-unit__img"
+            draggable="false"
+          />
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <div class="film-unit__code mono">KODAK 400TMY 02</div>
+        </div>
+        <div class="film-unit">
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <img
+            src="img/kodak_max.jpg"
+            class="film-unit__img"
+            draggable="false"
+          />
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <div class="film-unit__code mono">KODAK 400TMY 03</div>
+        </div>
+        <div class="film-unit">
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <img
+            src="img/kodak_plus.jpg"
+            class="film-unit__img"
+            draggable="false"
+          />
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <div class="film-unit__code mono">KODAK 400TMY 04</div>
+        </div>
       </div>
-      
-      <div class="film-unit">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&q=80&w=600" class="film-unit__img">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <div class="film-unit__code mono">KODAK 400TMY 02</div>
+
+      <!-- <section class="container archive-actions">
+        <a href="print.html?roll=042" class="btn btn--primary"
+          >이 롤의 사진 인화하기</a
+        >
+      </section> -->
+
+      <section class="container archive-header">
+        <div class="archive-header__title-container">
+          <h1 class="archive-header__title" contenteditable="true">
+            #041 - 제주도 추억
+          </h1>
+        </div>
+        <p class="archive-header__meta">
+          Olympus Pen EE-3 | Fujifilm C200 | 2026. 02. 20
+        </p>
+      </section>
+
+      <div class="archive-strip" id="strip-041">
+        <div class="film-unit">
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <img
+            src="img/kodak_gold.jpg"
+            class="film-unit__img"
+            draggable="false"
+          />
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <div class="film-unit__code mono">FUJI C200 01</div>
+        </div>
+        <div class="film-unit">
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <img
+            src="img/kodak_max.jpg"
+            class="film-unit__img"
+            draggable="false"
+          />
+          <div class="perforation">
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+            <div class="perf"></div>
+          </div>
+          <div class="film-unit__code mono">FUJI C200 02</div>
+        </div>
       </div>
 
-      <div class="film-unit">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&q=80&w=600" class="film-unit__img">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <div class="film-unit__code mono">KODAK 400TMY 03</div>
-      </div>
+      <!-- <section class="container archive-actions">
+        <a href="print.html?roll=041" class="btn btn--primary"
+          >이 롤의 사진 인화하기</a
+        >
+      </section> -->
+    </main>
+    <hr style="border: 0; border-top: 0px solid #eee; margin: 80px 0" />
 
-      <div class="film-unit">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&q=80&w=600" class="film-unit__img">
-        <div class="perforation"><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div></div>
-        <div class="film-unit__code mono">KODAK 400TMY 04</div>
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+      <div class="modal__content elevated">
+        <h2 class="modal__title modal__title--warning">롤 삭제</h2>
+        <p class="modal__desc">정말로 이 롤을 삭제하시겠습니까?<br>삭제된 데이터는 복구할 수 없습니다.</p>
+        <div class="modal__actions">
+          <button id="cancelDelete" class="btn btn--secondary">취소</button>
+          <button id="confirmDelete" class="btn btn--primary" style="background: #ff4d4d; border-color: #ff4d4d;">삭제</button>
+        </div>
       </div>
     </div>
 
-    <section class="container archive-actions">
-      <a href="shop.html" class="btn btn--primary">이 롤의 인화 주문하기</a>
-    </section>
-  </main>
+    <div id="footer"></div>
+    <script>
+      let rollToDelete = null;
+      const deleteModal = document.getElementById("deleteModal");
+      const cancelDeleteBtn = document.getElementById("cancelDelete");
+      const confirmDeleteBtn = document.getElementById("confirmDelete");
 
-   <div id="footer"></div>
-   <script src="js/include.js"></script>
-</body>
-</html>
-</body>
+      function deleteRoll(rollId) {
+        rollToDelete = rollId;
+        deleteModal.classList.add("modal--active");
+      }
+
+      cancelDeleteBtn.addEventListener("click", () => {
+        deleteModal.classList.remove("modal--active");
+        rollToDelete = null;
+      });
+
+      confirmDeleteBtn.addEventListener("click", () => {
+        if (rollToDelete) {
+          let rolls = JSON.parse(localStorage.getItem("filmlog_rolls") || "[]");
+          rolls = rolls.filter(r => r.id != rollToDelete);
+          localStorage.setItem("filmlog_rolls", JSON.stringify(rolls));
+          window.location.reload();
+        }
+      });
+
+      function loadDynamicRolls() {
+        const rolls = JSON.parse(localStorage.getItem("filmlog_rolls") || "[]");
+        const archiveMain = document.querySelector(".archive-page");
+        
+        // Reverse to maintain newest-first order when prepending at the top
+        rolls.slice().reverse().forEach(roll => {
+          const sectionHeader = document.createElement("section");
+          sectionHeader.className = "container archive-header";
+          sectionHeader.innerHTML = `
+            <div class="archive-header__title-container">
+              <h1 class="archive-header__title" contenteditable="true">
+                ${roll.title}
+              </h1>
+              <svg onclick="deleteRoll(${roll.id})" class="delete-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+              </svg>
+            </div>
+            <p class="archive-header__meta">
+              Leica M6 | Kodak Portra 400 | ${roll.date}
+            </p>
+          `;
+          
+          const strip = document.createElement("div");
+          strip.className = "archive-strip";
+          strip.id = `strip-${roll.id}`;
+          
+          roll.images.forEach((imgSrc, idx) => {
+            const unit = document.createElement("div");
+            unit.className = "film-unit";
+            unit.innerHTML = `
+              <div class="perforation">
+                <div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div>
+              </div>
+              <img src="${imgSrc}" class="film-unit__img" draggable="false" />
+              <div class="perforation">
+                <div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div><div class="perf"></div>
+              </div>
+              <div class="film-unit__code mono">KODAK 400TMY ${String(idx + 1).padStart(2, '0')}</div>
+            `;
+            strip.appendChild(unit);
+          });
+          
+          // Prepend at the very top of the archive page
+          archiveMain.prepend(strip);
+          archiveMain.prepend(sectionHeader);
+        });
+      }
+
+      window.addEventListener("load", () => {
+        loadDynamicRolls();
+        
+        // Re-initialize drag functionality for all strips including dynamic ones
+        const strips = document.querySelectorAll(".archive-strip");
+        strips.forEach((slider) => {
+          let isDown = false;
+          let startX;
+          let scrollLeft;
+
+          slider.addEventListener("mousedown", (e) => {
+            isDown = true;
+            slider.classList.add("active");
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+          });
+          slider.addEventListener("mouseleave", () => {
+            isDown = false;
+            slider.classList.remove("active");
+          });
+          slider.addEventListener("mouseup", () => {
+            isDown = false;
+            slider.classList.remove("active");
+          });
+          slider.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; //scroll-fast
+            slider.scrollLeft = scrollLeft - walk;
+          });
+        });
+      });
+    </script>
+    <script src="js/include.js"></script>
+  </body>
 </html>

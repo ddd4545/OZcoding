@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>필름 선택 | FilmLog</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/components.css" />
@@ -20,7 +21,8 @@
       </section>
 
       <div class="camera-grid">
-        <article class="film-card elevated">
+        <article class="film-card elevated" data-id="gold200">
+          <div class="film-card__check">✓</div>
           <div class="film-card__meta">
             <span class="mono">ISO 400</span>
             <span class="mono">36 EXP</span>
@@ -34,10 +36,10 @@
           <p class="film-card__desc">
             따뜻한 톤과 미세한 입자감 <br />인물 사진 찍기에 이상적입니다.
           </p>
-          <a href="camera-view.html" class="btn btn--select">선택하기</a>
         </article>
 
-        <article class="film-card elevated">
+        <article class="film-card elevated" data-id="colorplus">
+          <div class="film-card__check">✓</div>
           <div class="film-card__meta">
             <span class="mono">ISO 400</span>
             <span class="mono">36 EXP</span>
@@ -51,10 +53,10 @@
           <p class="film-card__desc">
             클래식한 컬러 필름 <br />높은 대비와 범용성을 자랑합니다.
           </p>
-          <a href="camera-view.html" class="btn btn--select">선택하기</a>
         </article>
 
-        <article class="film-card elevated">
+        <article class="film-card elevated" data-id="ultramax">
+          <div class="film-card__check">✓</div>
           <div class="film-card__meta">
             <span class="mono">ISO 200</span>
             <span class="mono">36 EXP</span>
@@ -68,17 +70,51 @@
           <p class="film-card__desc">
             자연스러운 색상 표현으로 <br />풍경 사진 찍기에 좋습니다.
           </p>
-          <button class="btn btn--select">선택하기</button>
         </article>
+      </div>
+
+      <div class="selection-footer">
+        <div class="container">
+          <button id="nextBtn" class="btn btn--next">필름 장착하기</button>
+        </div>
+      </div>
+
+      <!-- Validation Modal -->
+      <div id="validationModal" class="modal">
+        <div class="modal__content elevated">
+          <h2 class="modal__title modal__title--warning">알림</h2>
+          <p class="modal__desc">촬영을 시작하려면 필름을 선택해 주세요.</p>
+          <div class="modal__actions">
+            <button id="closeModal" class="btn btn--primary">확인</button>
+          </div>
+        </div>
       </div>
 
       <script>
         const cards = document.querySelectorAll(".film-card");
+        const nextBtn = document.getElementById("nextBtn");
+        const modal = document.getElementById("validationModal");
+        const closeModal = document.getElementById("closeModal");
+        let selectedFilm = null;
+
         cards.forEach((card) => {
           card.addEventListener("click", () => {
             cards.forEach((c) => c.classList.remove("film-card--selected"));
             card.classList.add("film-card--selected");
+            selectedFilm = card.dataset.id;
           });
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (!selectedFilm) {
+            modal.classList.add("modal--active");
+            return;
+          }
+          window.location.href = "camera-view.html";
+        });
+
+        closeModal.addEventListener("click", () => {
+          modal.classList.remove("modal--active");
         });
       </script>
     </main>

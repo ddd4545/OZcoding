@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>뷰파인더 | FilmLog</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
@@ -54,11 +55,17 @@
   <!-- Rewind Confirmation Modal -->
   <div id="rewindModal" class="modal">
     <div class="modal__content elevated">
-      <h2 class="modal__title">정말 필름을 감겠습니까?</h2>
+      <h2 class="modal__title">촬영 완료</h2>
       <p class="modal__desc">필름을 감으면 촬영을 다시 이어갈 수 없습니다.</p>
+      
+      <div class="modal__input-group">
+        <label for="rollTitle" class="modal__label">롤 제목</label>
+        <input type="text" id="rollTitle" class="modal__input" placeholder="예: 2026년 봄, 산책" />
+      </div>
+
       <div class="modal__actions">
         <button id="cancelRewind" class="btn btn--secondary">취소</button>
-        <button id="confirmRewind" class="btn btn--primary">필름 감기</button>
+        <button id="confirmRewind" class="btn btn--primary">저장하고 감기</button>
       </div>
     </div>
   </div>
@@ -121,9 +128,38 @@
     });
 
     confirmBtn.addEventListener('click', () => {
-      // Simulate archiving the roll
+      const titleInput = document.getElementById('rollTitle');
+      const title = titleInput.value || `새로운 롤 #${Date.now().toString().slice(-4)}`;
+      
+      // Curated local images for fallback/samples
+      const localImages = [
+        'img/kodak_gold.jpg',
+        'img/kodak_max.jpg',
+        'img/kodak_plus.jpg'
+      ];
+      
+      // Function to get random local images
+      function getRandomImages(count) {
+        const result = [];
+        for (let i = 0; i < count; i++) {
+          result.push(localImages[Math.floor(Math.random() * localImages.length)]);
+        }
+        return result;
+      }
+      
+      // Save roll data
+      const rolls = JSON.parse(localStorage.getItem('filmlog_rolls') || '[]');
+      const newRoll = {
+        id: Date.now(),
+        title: title,
+        date: new Date().toLocaleDateString('ko-KR').replace(/\. /g, '. ').replace(/\.$/, ''),
+        count: count,
+        images: getRandomImages(3)
+      };
+      
+      rolls.unshift(newRoll);
+      localStorage.setItem('filmlog_rolls', JSON.stringify(rolls));
       localStorage.setItem('filmlog_active_roll', 'false');
-      localStorage.setItem('filmlog_new_roll_available', 'true');
       
       // Navigate to archive
       window.location.href = 'archive.html';

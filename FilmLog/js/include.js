@@ -51,11 +51,36 @@ function highlightActiveLink() {
 document.addEventListener("DOMContentLoaded", () => {
   includeHTML();
 
-  // Index Page Hero Video Logic (with null check to prevent errors on other pages)
+  // Index Page Hero Video Logic
   const heroVideo = document.getElementById("hero-video");
   if (heroVideo) {
     heroVideo.addEventListener("loadedmetadata", () => {
       heroVideo.currentTime = 92;
     });
   }
+
+  // Smooth Scroll Initialization (Lenis)
+  const lenisScript = document.createElement("script");
+  lenisScript.src = "https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js";
+  lenisScript.onload = () => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  };
+  document.head.appendChild(lenisScript);
 });

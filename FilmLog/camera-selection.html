@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>카메라 선택 | FilmLog</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/components.css" />
@@ -24,7 +25,7 @@
       </section>
 
       <div class="camera-grid">
-        <article class="camera-card camera-card--selected">
+        <article class="camera-card elevated" data-id="funsaver">
           <div class="camera-card__check">✓</div>
           <img
             src="https://kodak.newcolumbus.co.kr/web/product/big/202308/0c5411223f59d775a3745875dc6944df.jpg"
@@ -33,10 +34,9 @@
           />
           <h3 class="camera-card__title">코닥 펀세이버27</h3>
           <p class="camera-card__desc">고감도 800 | 어디서나 자유롭게 사용</p>
-          <a href="film-selection.html" class="btn btn--select">선택하기</a>
         </article>
 
-        <article class="camera-card">
+        <article class="camera-card elevated" data-id="daylight">
           <div class="camera-card__check">✓</div>
           <img
             src="https://kodak.newcolumbus.co.kr/web/product/big/202308/c58faee5f6a30b064e2e9f5d47487ebf.jpg"
@@ -45,10 +45,9 @@
           />
           <h3 class="camera-card__title">코닥 데이라이트39</h3>
           <p class="camera-card__desc">고감도 800 | 야외활동 시 사용가능</p>
-          <a href="film-selection.html" class="btn btn--select">선택하기</a>
         </article>
 
-        <article class="camera-card">
+        <article class="camera-card elevated" data-id="half-h35">
           <div class="camera-card__check">✓</div>
           <img
             src="https://kodak.newcolumbus.co.kr/web/product/extra/big/202308/0d960efd81b8b29b93338a3918f9326c.jpg"
@@ -57,17 +56,51 @@
           />
           <h3 class="camera-card__title">코닥 하프 H35</h3>
           <p class="camera-card__desc">아크릴렌즈 | 하프로 72장 촬영 가능</p>
-          <a href="film-selection.html" class="btn btn--select">선택하기</a>
         </article>
+      </div>
+
+      <div class="selection-footer">
+        <div class="container">
+          <button id="nextBtn" class="btn btn--next">다음 단계로</button>
+        </div>
+      </div>
+
+      <!-- Validation Modal -->
+      <div id="validationModal" class="modal">
+        <div class="modal__content elevated">
+          <h2 class="modal__title modal__title--warning">알림</h2>
+          <p class="modal__desc">계속하려면 카메라를 하나 선택해 주세요.</p>
+          <div class="modal__actions">
+            <button id="closeModal" class="btn btn--primary">확인</button>
+          </div>
+        </div>
       </div>
 
       <script>
         const cards = document.querySelectorAll(".camera-card");
+        const nextBtn = document.getElementById("nextBtn");
+        const modal = document.getElementById("validationModal");
+        const closeModal = document.getElementById("closeModal");
+        let selectedCamera = null;
+
         cards.forEach((card) => {
           card.addEventListener("click", () => {
             cards.forEach((c) => c.classList.remove("camera-card--selected"));
             card.classList.add("camera-card--selected");
+            selectedCamera = card.dataset.id;
           });
+        });
+
+        nextBtn.addEventListener("click", () => {
+          if (!selectedCamera) {
+            modal.classList.add("modal--active");
+            return;
+          }
+          window.location.href = "film-selection.html";
+        });
+
+        closeModal.addEventListener("click", () => {
+          modal.classList.remove("modal--active");
         });
       </script>
     </main>
