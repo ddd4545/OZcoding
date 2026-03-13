@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카메라 선택 | FilmLog</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <main class="container">
+      <section style="padding: 100px 0 40px">
+        <a href="index.html" class="btn btn--back" title="뒤로가기"></a>
+        <h1 class="hero__title" style="font-size: 40px; text-align: left">
+          장비 선택
+        </h1>
+        <p class="hero__subtitle" style="text-align: left">
+          다음 여정을 함께할 동반자를 선택해 주세요.
+        </p>
+      </section>
+
+      <div class="camera-grid">
+        <article class="camera-card camera-card--selected">
+          <div class="camera-card__check">✓</div>
+          <img
+            src="https://kodak.newcolumbus.co.kr/web/product/big/202308/0c5411223f59d775a3745875dc6944df.jpg"
+            alt="코닥 펀세이버27"
+            class="camera-card__img"
+          />
+          <h3 class="camera-card__title">코닥 펀세이버27</h3>
+          <p class="camera-card__desc">고감도 800 | 어디서나 자유롭게 사용</p>
+          <a href="film-selection.html" class="btn btn--select">선택하기</a>
+        </article>
+
+        <article class="camera-card">
+          <div class="camera-card__check">✓</div>
+          <img
+            src="https://kodak.newcolumbus.co.kr/web/product/big/202308/c58faee5f6a30b064e2e9f5d47487ebf.jpg"
+            alt="코닥 데이라이트39"
+            class="camera-card__img"
+          />
+          <h3 class="camera-card__title">코닥 데이라이트39</h3>
+          <p class="camera-card__desc">고감도 800 | 야외활동 시 사용가능</p>
+          <a href="film-selection.html" class="btn btn--select">선택하기</a>
+        </article>
+
+        <article class="camera-card">
+          <div class="camera-card__check">✓</div>
+          <img
+            src="https://kodak.newcolumbus.co.kr/web/product/extra/big/202308/0d960efd81b8b29b93338a3918f9326c.jpg"
+            alt="코닥 하프 H35"
+            class="camera-card__img"
+          />
+          <h3 class="camera-card__title">코닥 하프 H35</h3>
+          <p class="camera-card__desc">아크릴렌즈 | 하프로 72장 촬영 가능</p>
+          <a href="film-selection.html" class="btn btn--select">선택하기</a>
+        </article>
+      </div>
+
+      <script>
+        const cards = document.querySelectorAll(".camera-card");
+        cards.forEach((card) => {
+          card.addEventListener("click", () => {
+            cards.forEach((c) => c.classList.remove("camera-card--selected"));
+            card.classList.add("camera-card--selected");
+          });
+        });
+      </script>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="js/include.js"></script>
+  </body>
+</html>

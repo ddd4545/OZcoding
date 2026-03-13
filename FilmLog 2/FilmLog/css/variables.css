@@ -1,0 +1,21 @@
+:root {
+  /* Colors */
+  --color-accent: #FF6A3D;
+  --color-dark: #121212;
+  --color-bg: #FFFFFF;
+  --color-muted: #8E8E93;
+  --color-border: rgba(0, 0, 0, 0.05);
+  --color-white: #FFFFFF;
+
+  /* Shadows */
+  --shadow-default: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 12px 24px rgba(0, 0, 0, 0.08);
+
+  /* Transitions */
+  --transition-base: all 0.3s ease;
+
+  /* Typography */
+  --font-primary: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+}

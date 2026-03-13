@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인화 서비스 | FilmLog</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="shop-body">
+  <div id="header"></div>
+
+  <main class="shop-page container">
+    <section class="shop-header">
+      <h1 class="shop-header__title">인화 서비스</h1>
+      <p class="shop-header__desc">손으로 직접 만질 수 있는 기록이 될 사진들을 선택해 주세요.</p>
+    </section>
+
+    <div class="photo-grid">
+      <div class="photo-item photo-item--selected">
+        <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=400" class="photo-item__img">
+        <div class="photo-item__check">✓</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&q=80&w=400" class="photo-item__img">
+        <div class="photo-item__check">✓</div>
+      </div>
+      <div class="photo-item photo-item--selected">
+        <img src="https://images.unsplash.com/photo-1492571350019-22de08371fd3?auto=format&fit=crop&q=80&w=400" class="photo-item__img">
+        <div class="photo-item__check">✓</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?auto=format&fit=crop&q=80&w=400" class="photo-item__img">
+        <div class="photo-item__check">✓</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=400" class="photo-item__img">
+        <div class="photo-item__check">✓</div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/include.js"></script>
+
+  <div class="checkout-bar">
+    <div class="container checkout-bar__container">
+      <div class="checkout-bar__info">
+        <div class="checkout-bar__count">2장의 사진 선택됨</div>
+        <div class="checkout-bar__details">4x6 인치 / 무광 인화지</div>
+      </div>
+      <button class="btn btn--primary checkout-bar__btn">2,500원 결제하기</button>
+    </div>
+  </div>
+
+  <script>
+    const photoItems = document.querySelectorAll('.photo-item');
+    photoItems.forEach(item => {
+      item.addEventListener('click', () => {
+        item.classList.toggle('photo-item--selected');
+        updateCheckoutBar();
+      });
+    });
+
+    function updateCheckoutBar() {
+      const selectedCount = document.querySelectorAll('.photo-item--selected').length;
+      const countEl = document.querySelector('.checkout-bar__count');
+      const btnEl = document.querySelector('.checkout-bar__btn');
+      
+      countEl.textContent = `${selectedCount}장의 사진 선택됨`;
+      btnEl.textContent = `${(selectedCount * 1250).toLocaleString()}원 결제하기`;
+      
+      if (selectedCount === 0) {
+        btnEl.classList.add('is-disabled');
+      } else {
+        btnEl.classList.remove('is-disabled');
+      }
+    }
+  </script>
+</body>
+</html>
+</body>
+</html>

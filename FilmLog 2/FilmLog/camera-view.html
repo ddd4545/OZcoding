@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>뷰파인더 | FilmLog</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="shooting-body">
+  <div id="header"></div>
+
+  <div class="shooting-info-bar">
+    <div class="container shooting-info-bar__container">
+      <div class="header__camera-info mono">LEICA M6 // PORTRA 400</div>
+      <button class="btn btn--rewind" id="rewindBtn">필름 감기</button>
+    </div>
+  </div>
+
+  <main class="shooting-page">
+    <div class="viewfinder-container">
+      <div class="viewfinder-viewport">
+        <!-- Live Camera Feed -->
+        <video id="cameraStream" autoplay playsinline class="viewfinder-video"></video>
+        
+        <!-- Viewfinder Overlay (Simulated Viewfinder Frame) -->
+        <div class="viewfinder-frame">
+          <div class="viewfinder-crosshair"></div>
+          <div class="viewfinder-marks">
+            <span>[</span>
+            <span>]</span>
+          </div>
+        </div>
+
+        <!-- Shot Counter -->
+        <div class="shot-counter mono">
+          <span class="shot-counter__label">SHOT</span>
+          <span id="counterValue" class="shot-counter__value">0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="shooting-controls">
+      <div class="shutter">
+        <div class="shutter__outer">
+          <button id="shutterBtn" class="shutter__btn"></button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Rewind Confirmation Modal -->
+  <div id="rewindModal" class="modal">
+    <div class="modal__content elevated">
+      <h2 class="modal__title">정말 필름을 감겠습니까?</h2>
+      <p class="modal__desc">필름을 감으면 촬영을 다시 이어갈 수 없습니다.</p>
+      <div class="modal__actions">
+        <button id="cancelRewind" class="btn btn--secondary">취소</button>
+        <button id="confirmRewind" class="btn btn--primary">필름 감기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <script src="js/include.js"></script>
+
+  <script>
+    // Camera Permission & Stream
+    const cameraVideo = document.getElementById('cameraStream');
+    async function initCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ 
+          video: { facingMode: 'environment' }, 
+          audio: false 
+        });
+        cameraVideo.srcObject = stream;
+      } catch (err) {
+        console.error("Camera error:", err);
+        alert("카메라 사용 권한이 필요합니다.");
+      }
+    }
+
+    // Shot Counter Logic
+    const counterValue = document.getElementById('counterValue');
+    const shutterBtn = document.getElementById('shutterBtn');
+    let count = 0;
+
+    shutterBtn.addEventListener('click', () => {
+      count++;
+      counterValue.textContent = count;
+      
+      // Flash Effect
+      const viewport = document.querySelector('.viewfinder-viewport');
+      viewport.style.filter = 'brightness(3) contrast(0.5)';
+      setTimeout(() => {
+        viewport.style.filter = '';
+      }, 100);
+      
+      // Shutter Click Animation
+      shutterBtn.style.transform = 'scale(0.9) translateY(2px)';
+      setTimeout(() => {
+        shutterBtn.style.transform = '';
+      }, 100);
+    });
+
+    // Rewind Modal Logic
+    const rewindBtn = document.getElementById('rewindBtn');
+    const modal = document.getElementById('rewindModal');
+    const cancelBtn = document.getElementById('cancelRewind');
+    const confirmBtn = document.getElementById('confirmRewind');
+
+    rewindBtn.addEventListener('click', () => {
+      modal.classList.add('modal--active');
+    });
+
+    cancelBtn.addEventListener('click', () => {
+      modal.classList.remove('modal--active');
+    });
+
+    confirmBtn.addEventListener('click', () => {
+      // Simulate archiving the roll
+      localStorage.setItem('filmlog_active_roll', 'false');
+      localStorage.setItem('filmlog_new_roll_available', 'true');
+      
+      // Navigate to archive
+      window.location.href = 'archive.html';
+    });
+
+    // Initialize
+    window.addEventListener('load', initCamera);
+  </script>
+</body>
+</html>

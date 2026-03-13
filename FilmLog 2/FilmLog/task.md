@@ -1,0 +1,18 @@
+# Task: FilmLog Web Prototype Development
+
+- [ ] Planning & Design System Setup [/]
+  - [ ] Create implementation plan [ ]
+  - [ ] Setup directory structure and reset.css [ ]
+- [ ] Core Design Implementation [ ]
+  - [ ] Define CSS variables and Layout system in layout.css [ ]
+  - [ ] Build UI components in components.css (Buttons, Cards, Badges, etc.) [ ]
+- [ ] Page Sections Implementation [ ]
+  - [ ] Develop Hero & GNB [ ]
+  - [ ] Implement Camera & Film Selector [ ]
+  - [ ] Implement Film Roll Archive with status UI [ ]
+  - [ ] Implement Shop & Print Service with order form [ ]
+  - [ ] Finalize Footer [ ]
+- [ ] Verification & Polish [ ]
+  - [ ] Generate premium assets [ ]
+  - [ ] Verify responsiveness and interactions [ ]
+  - [ ] Create walkthrough [ ]
