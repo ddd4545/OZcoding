@@ -1,0 +1,79 @@
+:root {
+    /* Colors */
+    --color-accent: #FF6A3D;
+    --color-dark: #121212;
+    --color-soft-bg: #EFEAE3;
+    --color-border: #2E2E2E;
+    --color-white: #FFFFFF;
+    --color-gray: #888888;
+    --color-glass: rgba(18, 18, 18, 0.8);
+
+    /* Typography */
+    --font-primary: 'Inter', 'Pretendard', sans-serif;
+    --font-size-base: 16px;
+    --line-height-base: 1.6;
+    --font-weight-bold: 700;
+    --letter-spacing-title: -0.02em;
+
+    /* Layout */
+    --container-max-width: 1200px;
+    --header-height: 64px;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 64px;
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
+
+/* Base Body Styles */
+body {
+    background-color: var(--color-soft-bg);
+    color: var(--color-dark);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+}
+
+/* Layout Containers */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+/* Flexbox Utils */
+.flex { display: flex; }
+.flex--center { align-items: center; justify-content: center; }
+.flex--between { justify-content: space-between; }
+.flex--column { flex-direction: column; }
+.flex--align-center { align-items: center; }
+
+/* Grid Utils */
+.grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+/* Responsive Grid Columns */
+@media (min-width: 320px) {
+    .grid--cols-1-mobile { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 768px) {
+    .grid--cols-2-tablet { grid-template-columns: repeat(2, 1fr); }
+    .grid--cols-3-tablet { grid-template-columns: repeat(3, 1fr); }
+    .container { padding: 0 var(--spacing-xl); }
+}
+
+@media (min-width: 1024px) {
+    .grid--cols-3-desktop { grid-template-columns: repeat(3, 1fr); }
+    .grid--cols-4-desktop { grid-template-columns: repeat(4, 1fr); }
+}

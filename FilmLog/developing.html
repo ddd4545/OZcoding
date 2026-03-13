@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>현상 중 | FilmLog</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="developing-body">
+  <div id="header"></div>
+
+  <main class="developing-page">
+    <div class="container developing-container">
+      <div class="developing-icon">🎞️</div>
+      <h1 class="developing-title">필름 현상 중...</h1>
+      <p class="developing-desc">당신의 소중한 기억들이 암실에서 조심스럽게 인화되고 있습니다.</p>
+      
+      <div id="developingTimer" class="developing-timer mono">23:59:59</div>
+
+      <div class="progress-bar">
+        <div class="progress-bar__fill"></div>
+      </div>
+
+      <a href="archive.html" class="btn btn--secondary">아카이브로 이동</a>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/include.js"></script>
+
+  <script>
+    // Simple countdown simulation
+    let seconds = 3600 * 24 - 1;
+    const timerEl = document.getElementById('developingTimer');
+    
+    setInterval(() => {
+      seconds--;
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      timerEl.textContent = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }, 1000);
+  </script>
+</body>
+</html>

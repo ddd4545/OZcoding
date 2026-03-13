@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FilmLog | 당신의 시선을 기록하세요</title>
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div id="header"></div>
+
+    <main>
+      <section class="hero hero--immersive">
+        <div class="hero__bg">
+          <video
+            id="hero-video"
+            src="video/hero-bg.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            style="width: 100%; height: 100%; object-fit: cover"
+          ></video>
+        </div>
+        <div class="grain-overlay"></div>
+        <div class="date-stamp" id="currentDate">26' 03 12</div>
+
+        <div class="container hero__content">
+          <h1 class="hero__title">필름으로 담고,<br />FilmLog로 기록하다</h1>
+          <p class="hero__subtitle">
+            당신의 가장 찬란한 순간들이 아날로그의 영혼을 담아 디지털로
+            기록됩니다.
+          </p>
+          <div class="hero__actions">
+            <a href="camera-selection.html" class="btn btn--primary"
+              >촬영 시작하기</a
+            >
+            <button
+              id="archiveBtn"
+              class="btn btn--secondary btn--archive is-disabled"
+            >
+              아카이브 보기
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // Hero Logic
+      const archiveBtn = document.getElementById("archiveBtn");
+      const dateStamp = document.getElementById("currentDate");
+
+      // Set dynamic date stamp in analog style (YY' MM DD)
+      const now = new Date();
+      const yy = String(now.getFullYear()).slice(-2);
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      dateStamp.textContent = `${yy}' ${mm} ${dd}`;
+
+      // Simulation state
+      const isLoggedIn = localStorage.getItem("filmlog_logged_in") === "true";
+      const hasActiveRoll =
+        localStorage.getItem("filmlog_active_roll") === "true";
+
+      function updateHeroState() {
+        if (!isLoggedIn) {
+          archiveBtn.classList.add("is-disabled");
+          archiveBtn.textContent = "촬영 중인 롤이 없습니다";
+          archiveBtn.title = "로그인이 필요합니다.";
+        } else if (!hasActiveRoll) {
+          archiveBtn.classList.add("is-disabled");
+          archiveBtn.textContent = "촬영 중인 롤이 없습니다";
+          archiveBtn.title = "현재 촬영 중인 롤이 없습니다.";
+        } else {
+          archiveBtn.classList.remove("is-disabled");
+          archiveBtn.textContent = "이어서 촬영하기";
+          archiveBtn.onclick = () => (window.location.href = "camera-view.html");
+        }
+      }
+
+      if (localStorage.getItem("filmlog_logged_in") === null) {
+        localStorage.setItem("filmlog_logged_in", "true");
+        localStorage.setItem("filmlog_active_roll", "true");
+      }
+
+      window.addEventListener("load", updateHeroState);
+    </script>
+
+    <div id="footer"></div>
+
+    <script src="js/include.js"></script>
+  </body>
+</html>
